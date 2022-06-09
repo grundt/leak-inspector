@@ -548,5 +548,21 @@ function setBadge(currTabId) {
 
     chrome.browserAction.setBadgeText({text:badgeText, tabId:currTabId});
     chrome.browserAction.setBadgeBackgroundColor({color:badgeBackgroundColor, tabId:currTabId});
+
+    // solely to help facilitate automated tests
+    browser.tabs.get(currTabId, tab => {
+      if (!!tab) {
+        if (tab.url==="http://example.com/") {
+          browser.tabs.sendMessage(currTabId, {
+            message: "LeakInspectorBadge",
+            value: {
+              Text: badgeText,
+              BackgroundColor: badgeBackgroundColor
+            }
+          });
+        }
+      }
+    });
+
   });
 }
