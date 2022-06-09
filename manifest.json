@@ -39,6 +39,14 @@
       ],
       "all_frames": true,
       "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "content_scripts/test_support.js"
+      ],
+      "matches": [
+        "*://example.com/"
+      ]
     }
   ],
   "background": {
